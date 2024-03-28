@@ -1,31 +1,33 @@
-import React from 'react'
-import { Platform, StyleSheet, Text, View } from 'react-native'
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import React, { useEffect } from 'react';
+import {StyleSheet, View} from 'react-native';
+import { Map } from '../../components/maps/Map';
+import { getCurrentLocation } from '../../../actions/location/location';
+import { useLocationStore } from '../../store/location/useLocationStore';
+import { LoadingScreen } from '../loading/LoadingScreen';
 
 export const MapScreen = () => {
+  const {lastKnownLocation, getLocation} = useLocationStore()
+
+
+  useEffect(() => {
+    if(lastKnownLocation === null) {
+      getLocation()
+    }
+  }, [])
+  
+
+  if(lastKnownLocation === null) {
+    return ( <LoadingScreen/>)
+  }
   return (
     <View style={styles.container}>
-    <MapView
-      provider={ Platform.OS === 'ios' ? undefined : PROVIDER_GOOGLE} // remove if not using Google Maps
-      style={styles.map}
-      region={{
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.015,
-        longitudeDelta: 0.0121,
-      }}
-    >
-    </MapView>
-  </View>
-  )
-}
-
+      <Map initialLocation={lastKnownLocation}/>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
   },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
- });
+});
