@@ -13,7 +13,7 @@ export const PermissionsChecked = ({children}: PropsWithChildren) => {
     if(locationStatus === 'granted'){
         navigation.reset({
             index: 0,
-            routes: [{name: 'MapScreen'}]
+            routes: [{name: 'MapeoScreen'}]
         })
     } else if (locationStatus != 'undetermined') {
         navigation.navigate('PermissionsScreen')

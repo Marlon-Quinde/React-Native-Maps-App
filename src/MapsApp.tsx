@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler';
+import 'react-native-svg';
 
 import {enableLatestRenderer} from 'react-native-maps';
 

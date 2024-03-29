@@ -28,6 +28,12 @@ export const PermissionsScreen = () => {
         >
           <Text style={{color:  'white', textAlign: 'center'}}>Mapeo</Text>
         </Pressable>
+        <Pressable
+          style={{...globalStyles.btnPrimary, marginTop: 4}}
+          onPress={() => navigation.navigate('LoginScreen')}
+        >
+          <Text style={{color:  'white', textAlign: 'center'}}>LoginScreen</Text>
+        </Pressable>
 
     </View>
     )
